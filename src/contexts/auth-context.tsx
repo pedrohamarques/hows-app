@@ -10,6 +10,7 @@ import {
 import { FIREBASE_AUTH } from "@services/firebaseConfig";
 
 import { UserCredentials } from "@typings/authentication";
+import { Alert } from "react-native";
 
 type AuthContextProps = {
   login: ({ email, password }: UserCredentials) => Promise<void>;
@@ -32,7 +33,10 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
       );
       setUser(response.user);
     } catch (error) {
-      console.log(error);
+      Alert.alert(
+        "Error",
+        "There was some problem while logging in. Please try again later."
+      );
     }
   }
 
