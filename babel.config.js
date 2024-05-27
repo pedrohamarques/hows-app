@@ -13,6 +13,17 @@ module.exports = function (api) {
           verbose: false,
         },
       ],
+      [
+        "module-resolver",
+        {
+          alias: {
+            "@routes": "./src/routes",
+            "@screens": "./src/screens",
+            "@typings": "./src/typings",
+            "@contexts": "./src/contexts",
+          },
+        },
+      ],
     ],
   };
 };
