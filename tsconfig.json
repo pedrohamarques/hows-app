@@ -9,6 +9,9 @@
       "@typings/*": ["./src/typings/*"],
       "@contexts/*": ["./src/contexts/*"],
       "@services/*": ["./src/services/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@components/*": ["./src/components/*"],
 
       "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
     }
