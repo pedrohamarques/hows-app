@@ -7,7 +7,10 @@
       "@screens/*": ["./src/screens/*"],
       "@routes/*": ["./src/routes/*"],
       "@typings/*": ["./src/typings/*"],
-      "@contexts/*": ["./src/contexts/*"]
+      "@contexts/*": ["./src/contexts/*"],
+      "@services/*": ["./src/services"],
+
+      "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
     }
   }
 }

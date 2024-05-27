@@ -21,6 +21,7 @@ module.exports = function (api) {
             "@screens": "./src/screens",
             "@typings": "./src/typings",
             "@contexts": "./src/contexts",
+            "@services": "./src/services",
           },
         },
       ],
