@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import {
   User,
+  UserCredential,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -15,7 +16,7 @@ import { Alert } from "react-native";
 type AuthContextProps = {
   login: ({ email, password }: UserCredentials) => Promise<void>;
   logout: () => Promise<void>;
-  register: ({ email, password }: UserCredentials) => Promise<void>;
+  register: ({ email, password }: UserCredentials) => Promise<UserCredential>;
   user: User | undefined;
 };
 
@@ -48,8 +49,10 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
         password
       );
       setUser(response.user);
+      return response;
     } catch (error) {
       console.log(error);
+      throw new Error("Error while creating user.");
     }
   }
 
@@ -74,8 +77,10 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
 
       if (user) {
         console.log("User is Logged In!");
+        setUser(user);
       } else {
         console.log("User is not Logged In!");
+        setUser(undefined);
       }
     });
   }, []);
