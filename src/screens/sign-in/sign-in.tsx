@@ -34,14 +34,13 @@ export function SignInScreen() {
       <KeyboardAvoidingView
         className="flex-1"
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={120}
       >
         <StatusBar style="dark" />
 
         <ScrollView
           className="gap-12 overflow-visible"
           style={{ paddingHorizontal: wp(5) }}
-          contentContainerStyle={{ flex: 1 }}
+          contentContainerStyle={{ flex: 1, justifyContent: "center" }}
         >
           <View className="items-center">
             <Image
