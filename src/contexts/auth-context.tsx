@@ -1,29 +1,23 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
+import { Alert } from "react-native";
 import {
-  User,
-  UserCredential,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 
-import { FIREBASE_AUTH } from "@services/firebaseConfig";
+import { FIREBASE_AUTH, database } from "@services/firebaseConfig";
 
 import { UserCredentials } from "@typings/authentication";
-import { Alert } from "react-native";
 
-type AuthContextProps = {
-  login: ({ email, password }: UserCredentials) => Promise<void>;
-  logout: () => Promise<void>;
-  register: ({ email, password }: UserCredentials) => Promise<UserCredential>;
-  user: User | undefined;
-};
+import { AuthContextProps, UserWithImage } from "./types";
 
 const AuthContext = createContext<AuthContextProps | null>(null);
 
 export function AuthProvider({ children }: React.PropsWithChildren) {
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<UserWithImage | null>(null);
 
   async function login({ email, password }: UserCredentials) {
     try {
@@ -64,6 +58,24 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
     }
   }
 
+  async function handleUpdateUserData(userId: string) {
+    const docRef = doc(database, "users", userId);
+
+    try {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists() && user) {
+        const data = docSnap.data();
+        setUser({
+          ...user,
+          displayName: data.username,
+          photoURL: data.photoUrl,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const value = {
     user,
     login,
@@ -73,14 +85,12 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
 
   useEffect(() => {
     onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      console.log(user);
-
       if (user) {
         console.log("User is Logged In!");
-        setUser(user);
+        handleUpdateUserData(user.uid);
       } else {
         console.log("User is not Logged In!");
-        setUser(undefined);
+        setUser(null);
       }
     });
   }, []);
