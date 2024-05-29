@@ -5,6 +5,7 @@ export enum PUBLIC_ROUTES {
 
 export enum PRIVATE_ROUTES {
   HOME = "Home",
+  SETTINGS = "Settings",
 }
 
 export type PublicRoutesParams = {
@@ -14,4 +15,5 @@ export type PublicRoutesParams = {
 
 export type PrivateRoutesParams = {
   [PRIVATE_ROUTES.HOME]: undefined;
+  [PRIVATE_ROUTES.SETTINGS]: undefined;
 };
