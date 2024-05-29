@@ -14,8 +14,6 @@ export function useHomeScreen() {
   async function handleFetchUsers() {
     let data: FirebaseUserDatabase[] = [];
 
-    console.log(user?.uid, "here");
-
     const q = query(usersCollection, where("id", "!=", user?.uid));
 
     const querySnapshot = await getDocs(q);
