@@ -7,16 +7,19 @@ import { FirebaseUserDatabase } from "@typings/authentication";
 type ChatItemProps = {
   testID?: string;
   user: FirebaseUserDatabase;
+  onChatPress: () => void;
 };
 
 export function ChatItem({
   testID = "screens.home.components.chat-item",
+  onChatPress,
   user,
 }: ChatItemProps) {
   return (
     <TouchableOpacity
       testID={testID}
       className="flex-row justify-between mx-4 items-center space-x-2 my-1 py-2"
+      onPress={onChatPress}
     >
       <Image
         source={require("@assets/empty-image.png")}

@@ -1,11 +1,12 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeScreen from "@screens/home";
+import SettingsScreen from "@screens/settings";
+import ChatRoomScreen from "@screens/chat-room";
 
 import { CustomHeader } from "@components/header-custom";
 
 import { PRIVATE_ROUTES, PrivateRoutesParams } from "@typings/routes";
-import SettingsScreen from "@screens/settings";
 
 export default function PrivateRoutes() {
   const Stack = createNativeStackNavigator<PrivateRoutesParams>();
@@ -29,6 +30,13 @@ export default function PrivateRoutes() {
         component={SettingsScreen}
         options={{
           header: () => <CustomHeader title="Settings" hasAvatar={false} />,
+        }}
+      />
+      <Stack.Screen
+        name={PRIVATE_ROUTES.CHAT_ROOM}
+        component={ChatRoomScreen}
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
