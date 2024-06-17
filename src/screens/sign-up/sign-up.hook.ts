@@ -51,8 +51,12 @@ export function useSignUpScreen() {
           username,
           password,
         });
-      } catch (error: any) {
-        Alert.alert("Error", error.message);
+      } catch (error) {
+        if (error instanceof Error) {
+          Alert.alert("Error", error.message);
+        } else {
+          console.log(error);
+        }
       }
     }
     setIsLoading(false);
