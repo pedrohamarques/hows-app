@@ -87,6 +87,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
     onAuthStateChanged(FIREBASE_AUTH, (user) => {
       if (user !== null) {
         console.log("User is Logged In!");
+        setUser(user);
         handleUpdateUserData(user.uid);
       } else {
         console.log("User is not Logged In!");
