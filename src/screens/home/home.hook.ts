@@ -12,7 +12,7 @@ export function useHomeScreen() {
   const [users, setUsers] = useState<FirebaseUserDatabase[]>([]);
 
   async function handleFetchUsers() {
-    let data: FirebaseUserDatabase[] = [];
+    const data: FirebaseUserDatabase[] = [];
 
     const q = query(usersCollection, where("id", "!=", user?.uid));
 
