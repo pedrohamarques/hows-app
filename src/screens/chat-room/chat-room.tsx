@@ -17,7 +17,8 @@ import { MessageList } from "./components/message-list";
 import { useChatRoomScreen } from "./chat-room.hook";
 
 export function ChatRoomScreen() {
-  const { userInfo, messages } = useChatRoomScreen();
+  const { userInfo, messages, messageText, setMessageText, handleSendMessage } =
+    useChatRoomScreen();
 
   return (
     <SafeAreaView
@@ -37,7 +38,11 @@ export function ChatRoomScreen() {
           contentContainerStyle={{ flex: 1, justifyContent: "space-between" }}
         >
           <View className="flex-1">
-            <MessageList messages={messages} />
+            <MessageList
+              messages={messages}
+              testID="screens.chat-room.message-list"
+              targetUser={userInfo}
+            />
           </View>
           <View style={{ marginBottom: hp(2.7) }} className="pt-2">
             <View className="flex-row justify-between mx-3 bg-white border p-2 border-neutral-300 rounded-full pl-5">
@@ -45,8 +50,16 @@ export function ChatRoomScreen() {
                 placeholder="Type Message"
                 className="flex-1 mr-2"
                 style={{ fontSize: hp(2) }}
+                onChangeText={setMessageText}
+                value={messageText}
+                returnKeyType="send"
+                enablesReturnKeyAutomatically
+                onSubmitEditing={handleSendMessage}
               />
-              <TouchableOpacity className="bg-neutral-200 p-2 mr-[1px] rounded-full">
+              <TouchableOpacity
+                className="bg-neutral-200 p-2 mr-[1px] rounded-full"
+                onPress={handleSendMessage}
+              >
                 <Feather name="send" size={hp(2)} color="#737373" />
               </TouchableOpacity>
             </View>
