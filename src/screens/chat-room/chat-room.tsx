@@ -17,8 +17,14 @@ import { MessageList } from "./components/message-list";
 import { useChatRoomScreen } from "./chat-room.hook";
 
 export function ChatRoomScreen() {
-  const { userInfo, messages, messageText, setMessageText, handleSendMessage } =
-    useChatRoomScreen();
+  const {
+    userInfo,
+    messages,
+    messageText,
+    setMessageText,
+    handleSendMessage,
+    scrollViewChatRef,
+  } = useChatRoomScreen();
 
   return (
     <SafeAreaView
@@ -42,6 +48,7 @@ export function ChatRoomScreen() {
               messages={messages}
               testID="screens.chat-room.message-list"
               targetUser={userInfo}
+              scrollRef={scrollViewChatRef}
             />
           </View>
           <View style={{ marginBottom: hp(2.7) }} className="pt-2">

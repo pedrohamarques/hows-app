@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import {
   Timestamp,
@@ -20,6 +20,7 @@ import { PRIVATE_ROUTES, PrivateRoutesParams } from "@typings/routes";
 import { getRoomId } from "./utils";
 
 import { MessageProps } from "./types";
+import { ScrollView } from "react-native";
 
 export function useChatRoomScreen() {
   const routes =
@@ -34,11 +35,19 @@ export function useChatRoomScreen() {
 
   const roomId = getRoomId(user!.uid!, userInfo.id);
 
+  const scrollViewChatRef = useRef<ScrollView | null>(null);
+
   async function handleCreateRoom() {
     await setDoc(doc(database, "rooms", roomId), {
       roomId,
       createdAt: Timestamp.fromDate(new Date()),
     });
+  }
+
+  function updateScrollView() {
+    setTimeout(() => {
+      scrollViewChatRef.current?.scrollToEnd({ animated: true });
+    }, 50);
   }
 
   async function handleSendMessage() {
@@ -56,7 +65,6 @@ export function useChatRoomScreen() {
         senderName: user?.displayName,
         createdAt: Timestamp.fromDate(new Date()),
       });
-
       setMessageText("");
     } catch (error) {
       console.log(error);
@@ -74,7 +82,6 @@ export function useChatRoomScreen() {
         const allMessages = snapshot.docs.map((doc) => {
           return doc.data() as MessageProps;
         });
-
         setMessages([...allMessages]);
       });
 
@@ -92,11 +99,16 @@ export function useChatRoomScreen() {
     retrieveMessages();
   }, []);
 
+  useEffect(() => {
+    updateScrollView();
+  }, [messages]);
+
   return {
     userInfo,
     messages,
     handleSendMessage,
     setMessageText,
     messageText,
+    scrollViewChatRef,
   };
 }
