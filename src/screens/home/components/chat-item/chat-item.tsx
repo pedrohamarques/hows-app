@@ -4,6 +4,8 @@ import { hp } from "@utils/dimensions";
 
 import { FirebaseUserDatabase } from "@typings/authentication";
 
+import { useChatItem } from "./chat-item.hook";
+
 type ChatItemProps = {
   testID?: string;
   user: FirebaseUserDatabase;
@@ -15,6 +17,7 @@ export function ChatItem({
   onChatPress,
   user,
 }: ChatItemProps) {
+  const { handleLastMessage } = useChatItem(user);
   return (
     <TouchableOpacity
       testID={testID}
@@ -46,7 +49,7 @@ export function ChatItem({
           style={{ fontSize: hp(1.6) }}
           className="font-medium text-neutral-500"
         >
-          Last message
+          {handleLastMessage()}
         </Text>
       </View>
     </TouchableOpacity>
