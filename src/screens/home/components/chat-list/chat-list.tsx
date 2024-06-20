@@ -6,6 +6,7 @@ import { FirebaseUserDatabase } from "@typings/authentication";
 
 import { ChatItem } from "../chat-item";
 import { useChatList } from "./chat-list.hook";
+import { EmptyList } from "../empty-list";
 
 type ChatListProps = {
   testID?: string;
@@ -29,6 +30,9 @@ export function ChatList({
           <ChatItem user={item} onChatPress={() => handleChatPress(item)} />
         )}
         ItemSeparatorComponent={Divider}
+        ListEmptyComponent={
+          <EmptyList testID="screens.home.components.chat-list.empty-list" />
+        }
       />
     </View>
   );
