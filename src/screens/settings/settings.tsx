@@ -5,7 +5,7 @@ import { SettingsItem } from "./components";
 import { useSettingsScreen } from "./settings.hook";
 
 export function SettingsScreen() {
-  const { handleLogout } = useSettingsScreen();
+  const { handleLogout, handleProfileNavigation } = useSettingsScreen();
 
   return (
     <SafeAreaView className="flex-1 justify-between bg-white">
@@ -13,6 +13,7 @@ export function SettingsScreen() {
         title="Profile"
         icon="person"
         testID="screens.settings.settings-item.profile"
+        onPress={handleProfileNavigation}
         isNavigating
       />
       <View className="mb-4">

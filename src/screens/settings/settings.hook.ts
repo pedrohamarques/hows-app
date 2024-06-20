@@ -1,7 +1,14 @@
-import { useAuthContext } from "@contexts/auth-context";
 import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import { useAuthContext } from "@contexts/auth-context";
+
+import { PRIVATE_ROUTES, PrivateRoutesParams } from "@typings/routes";
 
 export function useSettingsScreen() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<PrivateRoutesParams>>();
   const { logout } = useAuthContext();
 
   function handleLogout() {
@@ -10,7 +17,13 @@ export function useSettingsScreen() {
       { text: "Cancel", style: "cancel" },
     ]);
   }
+
+  function handleProfileNavigation() {
+    navigation.navigate(PRIVATE_ROUTES.PROFILE);
+  }
+
   return {
     handleLogout,
+    handleProfileNavigation,
   };
 }

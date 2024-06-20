@@ -7,6 +7,7 @@ import ChatRoomScreen from "@screens/chat-room";
 import { CustomHeader } from "@components/header-custom";
 
 import { PRIVATE_ROUTES, PrivateRoutesParams } from "@typings/routes";
+import { ProfileScreen } from "@screens/profile";
 
 export default function PrivateRoutes() {
   const Stack = createNativeStackNavigator<PrivateRoutesParams>();
@@ -44,6 +45,20 @@ export default function PrivateRoutes() {
         component={ChatRoomScreen}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name={PRIVATE_ROUTES.PROFILE}
+        component={ProfileScreen}
+        options={{
+          header: () => (
+            <CustomHeader
+              title="Profile"
+              hasAvatar={false}
+              testID="routes.private.routes.profiles-screen"
+              canGoBack
+            />
+          ),
         }}
       />
     </Stack.Navigator>
