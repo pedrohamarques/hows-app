@@ -29,7 +29,14 @@ export default function PrivateRoutes() {
         name={PRIVATE_ROUTES.SETTINGS}
         component={SettingsScreen}
         options={{
-          header: () => <CustomHeader title="Settings" hasAvatar={false} />,
+          header: () => (
+            <CustomHeader
+              title="Settings"
+              hasAvatar={false}
+              testID="routes.private-routes.settings-screen"
+              canGoBack
+            />
+          ),
         }}
       />
       <Stack.Screen

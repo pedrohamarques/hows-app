@@ -7,6 +7,7 @@ import { blurhash } from "@constants/image-hash";
 import { hp } from "@utils/dimensions";
 
 import { useCustomHeader } from "./header-custom.hook";
+import { BackButton } from "@components/back-button";
 
 const isIos = Platform.OS === "ios";
 
@@ -14,12 +15,14 @@ type CustomHeaderProps = {
   title: string;
   testID?: string;
   hasAvatar?: boolean;
+  canGoBack?: boolean;
 };
 
 export function CustomHeader({
   title,
   testID = "components.header-custom.",
   hasAvatar = true,
+  canGoBack = false,
 }: CustomHeaderProps) {
   const { top } = useSafeAreaInsets();
   const { user, handleAvatarPress } = useCustomHeader();
@@ -30,7 +33,12 @@ export function CustomHeader({
       className="flex-row justify-between items-center px-5 bg-indigo-400 pb-6 rounded-b-3xl shadow"
       testID={testID}
     >
-      <View>
+      <View className="flex-row justify-center items-center">
+        {canGoBack && (
+          <View className="mr-4">
+            <BackButton testID="components.header-custom.back-button" />
+          </View>
+        )}
         <Text style={{ fontSize: hp(3) }} className="font-medium text-white">
           {title}
         </Text>
