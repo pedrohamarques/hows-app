@@ -24,6 +24,7 @@ export function SettingsItem({
   return (
     <TouchableOpacity
       {...rest}
+      testID={testID}
       className="flex-row bg-gray-50 p-5 items-center justify-between"
     >
       <View className="flex-row items-center space-x-4">
