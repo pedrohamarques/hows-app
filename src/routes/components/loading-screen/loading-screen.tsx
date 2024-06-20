@@ -6,7 +6,9 @@ type LoadingScreenProps = {
   testID?: string;
 };
 
-export function LoadingScreen({ testID }: LoadingScreenProps) {
+export function LoadingScreen({
+  testID = "routes.components.loading-screen",
+}: LoadingScreenProps) {
   return (
     <View className="flex-1 justify-center items-center" testID={testID}>
       <Loading size={80} />
