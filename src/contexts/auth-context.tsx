@@ -18,6 +18,7 @@ const AuthContext = createContext<AuthContextProps | null>(null);
 
 export function AuthProvider({ children }: React.PropsWithChildren) {
   const [user, setUser] = useState<UserWithImage | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   async function login({ email, password }: UserCredentials) {
     try {
@@ -71,6 +72,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
           photoURL: data.photoUrl,
         });
       }
+      setIsLoaded(true);
     } catch (error) {
       console.log(error);
     }
@@ -81,17 +83,19 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
     login,
     logout,
     register,
+    isLoaded,
   };
 
   useEffect(() => {
     onAuthStateChanged(FIREBASE_AUTH, (user) => {
       if (user !== null) {
-        console.log("User is Logged In!");
         setUser(user);
         handleUpdateUserData(user.uid);
+        console.log("User is Logged In!");
       } else {
         console.log("User is not Logged In!");
         setUser(null);
+        setIsLoaded(true);
       }
     });
   }, []);

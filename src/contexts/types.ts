@@ -10,4 +10,5 @@ export type AuthContextProps = {
   logout: () => Promise<void>;
   register: ({ email, password }: UserCredentials) => Promise<UserCredential>;
   user: UserWithImage | null;
+  isLoaded: boolean;
 };
