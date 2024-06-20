@@ -120,7 +120,7 @@ export function SignInScreen() {
                 style={{ fontSize: hp(1.8) }}
                 className="font-semibold text-neutral-500"
               >
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
               </Text>
 
               <Pressable onPress={handleSignUpPress}>
