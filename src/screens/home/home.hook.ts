@@ -10,7 +10,6 @@ import { FirebaseUserDatabase } from "@typings/authentication";
 export function useHomeScreen() {
   const { user } = useAuthContext();
   const [users, setUsers] = useState<FirebaseUserDatabase[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   async function handleFetchUsers() {
     const data: FirebaseUserDatabase[] = [];
@@ -24,7 +23,6 @@ export function useHomeScreen() {
     });
 
     setUsers(data);
-    setIsLoaded(true);
   }
 
   useEffect(() => {
@@ -35,6 +33,5 @@ export function useHomeScreen() {
 
   return {
     users,
-    isLoaded,
   };
 }
