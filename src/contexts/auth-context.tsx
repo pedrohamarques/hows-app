@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import { Alert } from "react-native";
 import {
+  User,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -59,8 +60,8 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
     }
   }
 
-  async function handleUpdateUserData(userId: string) {
-    const docRef = doc(database, "users", userId);
+  async function handleUpdateUserData(user: User) {
+    const docRef = doc(database, "users", user.uid);
 
     try {
       const docSnap = await getDoc(docRef);
@@ -89,8 +90,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
   useEffect(() => {
     onAuthStateChanged(FIREBASE_AUTH, (user) => {
       if (user !== null) {
-        setUser(user);
-        handleUpdateUserData(user.uid);
+        handleUpdateUserData(user);
         console.log("User is Logged In!");
       } else {
         console.log("User is not Logged In!");
