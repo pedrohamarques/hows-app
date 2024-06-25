@@ -18,6 +18,7 @@ export function ProfileScreen() {
     isUsernameEditable,
     user,
     profileState,
+    isSaving,
   } = useProfileScreen();
   return (
     <View className="flex-1 justify-between items-center bg-white">
@@ -66,6 +67,7 @@ export function ProfileScreen() {
           testID="screens.profile.custom-button.save"
           onPress={handleSavePress}
           disabled={!profileState.isEditing}
+          loading={isSaving}
         />
       </View>
     </View>

@@ -1,5 +1,15 @@
-import { useEffect, useReducer, useState } from "react";
+import { useReducer, useState } from "react";
+import { Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { doc, updateDoc } from "firebase/firestore";
+import { database } from "@services/firebaseConfig";
+import {
+  ref,
+  getStorage,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import { z } from "zod";
 
 import { useAuthContext } from "@contexts/auth-context";
 import {
@@ -8,8 +18,12 @@ import {
   editingProfileReducer,
 } from "./reducers";
 
+import { formatImagePath } from "@utils/format";
+
 export function useProfileScreen() {
-  const { user } = useAuthContext();
+  const { user, updateUserData } = useAuthContext();
+
+  const usernameSchema = z.string().min(3);
 
   const initialProfileState: ProfileDataState = {
     avatar: user?.photoURL,
@@ -23,6 +37,7 @@ export function useProfileScreen() {
   );
 
   const [isUsernameEditable, setIsUsernameEditable] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   function handleEditPress() {
     setIsUsernameEditable((previousState) => !previousState);
@@ -33,7 +48,7 @@ export function useProfileScreen() {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 0.7,
+      quality: 0.5,
     });
 
     if (!result.canceled) {
@@ -48,11 +63,56 @@ export function useProfileScreen() {
     dispatch({ type: ActionKind.IS_EDITING_USERNAME, payload: username });
   }
 
-  function handleSavePress() {
-    console.log("pressed");
+  async function uploadImageAsync(uri: string) {
+    const dateTime = new Date().toISOString();
+    const storageRef = ref(
+      getStorage(),
+      `avatars/${formatImagePath(uri)}${dateTime}`
+    );
+
+    const response = await fetch(uri);
+    const imageBlob = await response.blob();
+    const snapshot = await uploadBytesResumable(storageRef, imageBlob, {
+      contentType: "image/jpeg",
+    });
+
+    const downloadUrl = await getDownloadURL(snapshot.ref);
+
+    return downloadUrl;
   }
 
-  useEffect(() => {}, []);
+  async function handleSavePress() {
+    dispatch({ type: ActionKind.SAVING });
+    setIsSaving(true);
+    const { error } = usernameSchema.safeParse(profileState.username);
+
+    if (error) {
+      return Alert.alert(
+        "Error",
+        "Username must be at least 3 characters long"
+      );
+    }
+
+    try {
+      const publicImageUrl = await uploadImageAsync(
+        profileState.avatar as string
+      );
+      await updateDoc(doc(database, "users", user!.uid!), {
+        photoUrl: publicImageUrl,
+      });
+      await updateUserData();
+
+      setIsSaving(false);
+
+      Alert.alert("Success", "Avatar uploaded successfully!");
+    } catch (error) {
+      if (error instanceof Error) {
+        Alert.alert("Error", error.message);
+      } else {
+        console.log(error);
+      }
+    }
+  }
 
   return {
     handleEditPress,
@@ -62,5 +122,6 @@ export function useProfileScreen() {
     isUsernameEditable,
     user,
     profileState,
+    isSaving,
   };
 }
