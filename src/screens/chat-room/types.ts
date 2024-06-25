@@ -1,5 +1,7 @@
+import { Timestamp } from "firebase/firestore";
+
 export type MessageProps = {
-  createdAt: Date;
+  createdAt: Timestamp;
   profileUrl: string | null;
   senderName: string | null;
   text: string;

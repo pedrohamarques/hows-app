@@ -34,8 +34,8 @@ export function Header({
           <View className="flex-row items-center gap-3 px-2">
             <Image
               source={
-                userInfo?.profileUrl
-                  ? userInfo.profileUrl
+                userInfo?.photoUrl
+                  ? userInfo.photoUrl
                   : require("@assets/empty-image.png")
               }
               placeholder={blurhash}

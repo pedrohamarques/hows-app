@@ -6,5 +6,5 @@ export type UserCredentials = {
 export type FirebaseUserDatabase = UserCredentials & {
   id: string;
   username: string;
-  profileUrl?: string;
+  photoUrl?: string;
 };
