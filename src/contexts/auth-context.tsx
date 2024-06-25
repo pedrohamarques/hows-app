@@ -60,6 +60,14 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
     }
   }
 
+  async function updateUserData() {
+    try {
+      await handleUpdateUserData(user!);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function handleUpdateUserData(user: User) {
     const docRef = doc(database, "users", user.uid);
 
@@ -84,6 +92,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
     login,
     logout,
     register,
+    updateUserData,
     isLoaded,
   };
 
