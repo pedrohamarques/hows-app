@@ -1,10 +1,4 @@
-import { formatDate } from "date-fns";
-import { useAuthContext } from "@contexts/auth-context";
-import { MessageProps } from "@screens/chat-room/types";
-
-import { getRoomId } from "@screens/chat-room/utils";
-import { database } from "@services/firebaseConfig";
-import { FirebaseUserDatabase } from "@typings/authentication";
+import { useEffect, useState } from "react";
 import {
   collection,
   doc,
@@ -12,7 +6,16 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
+
+import { useAuthContext } from "@contexts/auth-context";
+
+import { MessageProps } from "@screens/chat-room/types";
+import { getRoomId } from "@screens/chat-room/utils";
+
+import { database } from "@services/firebaseConfig";
+
+import { FirebaseUserDatabase } from "@typings/authentication";
+import { formatTimestamp } from "./util";
 
 export function useChatItem(user: FirebaseUserDatabase) {
   const [lastMessage, setLastMessage] = useState<MessageProps | null>(null);
@@ -43,22 +46,24 @@ export function useChatItem(user: FirebaseUserDatabase) {
   }
 
   function handleLastMessage() {
-    if (lastMessage?.userId !== user.id) {
-      return `You: ${lastMessage?.text}`;
-    } else if (lastMessage.userId === user.id) {
-      return `${lastMessage.senderName}: ${lastMessage.text}`;
-    } else {
-      return "Loading...";
+    if (lastMessage) {
+      if (lastMessage.userId !== user.id) {
+        return `You: ${lastMessage.text}`;
+      } else if (lastMessage.userId === user.id) {
+        return `${lastMessage.senderName}: ${lastMessage.text}`;
+      } else {
+        return "Loading...";
+      }
     }
   }
 
-  const formattedDate = formatDate(lastMessage!.createdAt!, "dd/MM");
-
-  console.log(formattedDate);
+  const lastMessageTime = lastMessage
+    ? formatTimestamp(lastMessage?.createdAt)
+    : null;
 
   useEffect(() => {
     retrieveMessages();
   }, []);
 
-  return { handleLastMessage };
+  return { handleLastMessage, lastMessageTime };
 }

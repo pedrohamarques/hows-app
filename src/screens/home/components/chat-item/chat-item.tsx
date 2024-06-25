@@ -17,7 +17,8 @@ export function ChatItem({
   onChatPress,
   user,
 }: ChatItemProps) {
-  const { handleLastMessage } = useChatItem(user);
+  const { handleLastMessage, lastMessageTime } = useChatItem(user);
+
   return (
     <TouchableOpacity
       testID={testID}
@@ -25,7 +26,11 @@ export function ChatItem({
       onPress={onChatPress}
     >
       <Image
-        source={require("@assets/empty-image.png")}
+        source={
+          user.photoUrl
+            ? { uri: user.photoUrl }
+            : require("@assets/empty-image.png")
+        }
         style={{ height: hp(6), width: hp(6) }}
         className="rounded-full"
       />
@@ -42,7 +47,7 @@ export function ChatItem({
             style={{ fontSize: hp(1.8) }}
             className="font-medium text-neutral-800"
           >
-            Time
+            {lastMessageTime}
           </Text>
         </View>
         <Text
