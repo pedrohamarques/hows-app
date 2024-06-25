@@ -15,7 +15,12 @@ export function BackButton({
 
   return (
     <TouchableOpacity testID={testID} onPress={handleGoBack}>
-      <Feather name="chevron-left" size={hp(3)} color="white" />
+      <Feather
+        name="chevron-left"
+        size={hp(3)}
+        color="white"
+        testID="components.back-button.chevron-left"
+      />
     </TouchableOpacity>
   );
 }
