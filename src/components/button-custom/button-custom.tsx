@@ -1,8 +1,10 @@
+import { Loading } from "@components/loading";
 import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 
 type CustomButtonProps = TouchableOpacityProps & {
   customStyles?: string;
   text: string;
+  loading?: boolean;
 };
 
 export function CustomButton({
@@ -10,6 +12,8 @@ export function CustomButton({
   customStyles,
   text,
   disabled,
+  loading = false,
+  ...rest
 }: CustomButtonProps) {
   return (
     <TouchableOpacity
@@ -17,14 +21,19 @@ export function CustomButton({
       className={`py-4 w-full items-center rounded-2xl ${customStyles} ${
         disabled ? "bg-neutral-200" : "bg-indigo-400"
       }`}
+      {...rest}
     >
-      <Text
-        className={`font-semibold text-xl ${
-          disabled ? "text-neutral-700" : "text-white"
-        }`}
-      >
-        {text}
-      </Text>
+      {!loading ? (
+        <Text
+          className={`font-semibold text-xl ${
+            disabled ? "text-neutral-700" : "text-white"
+          }`}
+        >
+          {text}
+        </Text>
+      ) : (
+        <Loading size={24} testID="components.button-custom.loading" />
+      )}
     </TouchableOpacity>
   );
 }
