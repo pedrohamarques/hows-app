@@ -20,7 +20,7 @@ type CustomHeaderProps = {
 
 export function CustomHeader({
   title,
-  testID = "components.header-custom.",
+  testID = "components.header-custom",
   hasAvatar = true,
   canGoBack = false,
 }: CustomHeaderProps) {
@@ -47,6 +47,7 @@ export function CustomHeader({
       {hasAvatar && (
         <TouchableOpacity onPress={handleAvatarPress}>
           <Image
+            testID="components.header-custom.image-avatar"
             transition={500}
             style={{ height: hp(3), aspectRatio: 1, borderRadius: 100 }}
             placeholder={blurhash}

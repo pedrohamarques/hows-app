@@ -1,6 +1,8 @@
-import { useAuthContext } from "@contexts/auth-context";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import { useAuthContext } from "@contexts/auth-context";
+
 import { PRIVATE_ROUTES, PrivateRoutesParams } from "@typings/routes";
 
 export function useCustomHeader() {
