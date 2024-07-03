@@ -9,7 +9,7 @@ export function useChatList() {
     useNavigation<NativeStackNavigationProp<PrivateRoutesParams>>();
 
   function handleChatPress(data: GroupChatProp) {
-    navigation.navigate(PRIVATE_ROUTES.CHAT_ROOM, { groupData: data });
+    navigation.navigate(PRIVATE_ROUTES.GROUP_CHAT_ROOM, { groupData: data });
   }
 
   return {
