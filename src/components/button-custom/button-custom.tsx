@@ -18,9 +18,9 @@ export function CustomButton({
   return (
     <TouchableOpacity
       testID={testID}
-      className={`py-4 w-full items-center rounded-2xl ${customStyles} ${
+      className={`py-4 w-full items-center rounded-2xl ${
         disabled ? "bg-neutral-200" : "bg-indigo-400"
-      }`}
+      } ${customStyles} `}
       {...rest}
     >
       {!loading ? (
