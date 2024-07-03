@@ -1,4 +1,5 @@
 import { FirebaseUserDatabase } from "./authentication";
+import { GroupChatProp } from "./chat";
 
 export enum PUBLIC_ROUTES {
   SIGN_IN = "SignIn",
@@ -22,7 +23,8 @@ export type PrivateRoutesParams = {
   [PRIVATE_ROUTES.HOME]: undefined;
   [PRIVATE_ROUTES.SETTINGS]: undefined;
   [PRIVATE_ROUTES.CHAT_ROOM]: {
-    userData: FirebaseUserDatabase;
+    userData?: FirebaseUserDatabase;
+    groupData?: GroupChatProp;
   };
   [PRIVATE_ROUTES.PROFILE]: undefined;
   [PRIVATE_ROUTES.GROUP]: undefined;

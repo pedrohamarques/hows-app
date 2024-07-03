@@ -25,7 +25,7 @@ export function SocketProvider({ children }: PropsWithChildren) {
         transports: ["websocket"],
       });
 
-      socket.on("connected", () => {
+      socket.on("connect", () => {
         console.log("Socket Connected");
       });
 
@@ -57,4 +57,6 @@ export function useSocketContext() {
   if (!value) {
     throw new Error("useSocketContext must be wrapped in a <SocketProvider />");
   }
+
+  return value;
 }
