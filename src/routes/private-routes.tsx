@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "@screens/home";
 import SettingsScreen from "@screens/settings";
 import ChatRoomScreen from "@screens/chat-room";
+import GroupScreen from "@screens/group";
 
 import { CustomHeader } from "@components/header-custom";
 
@@ -55,8 +56,21 @@ export default function PrivateRoutes() {
             <CustomHeader
               title="Profile"
               hasAvatar={false}
-              testID="routes.private.routes.profiles-screen"
+              testID="routes.private.routes.profile-screen"
               canGoBack
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name={PRIVATE_ROUTES.GROUP}
+        component={GroupScreen}
+        options={{
+          header: () => (
+            <CustomHeader
+              title="Groups"
+              hasAvatar={true}
+              testID="routes.private.routes.group-screen"
             />
           ),
         }}

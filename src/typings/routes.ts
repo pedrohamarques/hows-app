@@ -10,6 +10,7 @@ export enum PRIVATE_ROUTES {
   SETTINGS = "Settings",
   CHAT_ROOM = "ChatRoom",
   PROFILE = "Profile",
+  GROUP = "Group",
 }
 
 export type PublicRoutesParams = {
@@ -24,4 +25,5 @@ export type PrivateRoutesParams = {
     userData: FirebaseUserDatabase;
   };
   [PRIVATE_ROUTES.PROFILE]: undefined;
+  [PRIVATE_ROUTES.GROUP]: undefined;
 };

@@ -22,8 +22,13 @@ export function useSettingsScreen() {
     navigation.navigate(PRIVATE_ROUTES.PROFILE);
   }
 
+  function handleGroupNavigation() {
+    navigation.navigate(PRIVATE_ROUTES.GROUP);
+  }
+
   return {
     handleLogout,
     handleProfileNavigation,
+    handleGroupNavigation,
   };
 }

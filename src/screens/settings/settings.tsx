@@ -5,17 +5,27 @@ import { SettingsItem } from "./components";
 import { useSettingsScreen } from "./settings.hook";
 
 export function SettingsScreen() {
-  const { handleLogout, handleProfileNavigation } = useSettingsScreen();
+  const { handleLogout, handleProfileNavigation, handleGroupNavigation } =
+    useSettingsScreen();
 
   return (
     <SafeAreaView className="flex-1 justify-between bg-white">
-      <SettingsItem
-        title="Profile"
-        icon="person"
-        testID="screens.settings.settings-item.profile"
-        onPress={handleProfileNavigation}
-        isNavigating
-      />
+      <View>
+        <SettingsItem
+          title="Profile"
+          icon="person"
+          testID="screens.settings.settings-item.profile"
+          onPress={handleProfileNavigation}
+          isNavigating
+        />
+        <SettingsItem
+          title="Groups"
+          icon="diamond"
+          testID="screens.settings.settings-item.group"
+          onPress={handleGroupNavigation}
+          isNavigating
+        />
+      </View>
       <View className="mb-4">
         <SettingsItem
           title="Logout"
