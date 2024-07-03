@@ -34,7 +34,6 @@ export function CustomInput({
         <TextInput
           style={{ fontSize: hp(2) }}
           className=" font-semibold text-neutral-700  w-[80%]"
-          keyboardType="email-address"
           editable={editable}
           {...rest}
         />

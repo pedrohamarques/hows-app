@@ -65,6 +65,7 @@ export function SignInScreen() {
               containerStyle="mb-4"
               value={email}
               onChangeText={setEmail}
+              keyboardType="email-address"
             />
             <View>
               <CustomInput
