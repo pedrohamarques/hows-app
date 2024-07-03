@@ -4,6 +4,7 @@ import HomeScreen from "@screens/home";
 import SettingsScreen from "@screens/settings";
 import ChatRoomScreen from "@screens/chat-room";
 import GroupScreen from "@screens/group";
+import GroupChatRoomScreen from "@screens/group-chat-room";
 
 import { CustomHeader } from "@components/header-custom";
 
@@ -73,6 +74,13 @@ export default function PrivateRoutes() {
               testID="routes.private.routes.group-screen"
             />
           ),
+        }}
+      />
+      <Stack.Screen
+        name={PRIVATE_ROUTES.GROUP_CHAT_ROOM}
+        component={GroupChatRoomScreen}
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
