@@ -13,7 +13,7 @@ type ChatItemProps = {
 };
 
 export function ChatItem({
-  testID = "screens.home.components.chat-item",
+  testID = "components.chat-item",
   onChatPress,
   user,
 }: ChatItemProps) {

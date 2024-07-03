@@ -1,12 +1,12 @@
 import { FlatList, View } from "react-native";
 
 import { Divider } from "@components/divider";
+import { ChatItem } from "@components/chat-item";
+import { EmptyList } from "@components/empty-list";
 
 import { FirebaseUserDatabase } from "@typings/authentication";
 
-import { ChatItem } from "../chat-item";
 import { useChatList } from "./chat-list.hook";
-import { EmptyList } from "../empty-list";
 
 type ChatListProps = {
   testID?: string;

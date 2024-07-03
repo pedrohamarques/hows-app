@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 
 import { Loading } from "@components/loading";
 
-import { ChatList } from "./components/chat-list/chat-list";
+import { ChatList } from "@components/chat-list";
 import { useHomeScreen } from "./home.hook";
 
 export function HomeScreen() {
