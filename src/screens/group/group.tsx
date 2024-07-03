@@ -1,12 +1,13 @@
 import { Modal, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
-import { ChatList } from "@components/chat-list";
 import { Loading } from "@components/loading";
 import { CustomButton } from "@components/button-custom";
 import { CustomInput } from "@components/input-custom";
 
 import { useGroupScreen } from "./group.hook";
+
+import { ChatList } from "./components/chat-list";
 
 export function GroupScreen() {
   const {
