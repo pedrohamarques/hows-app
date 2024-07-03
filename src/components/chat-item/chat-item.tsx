@@ -8,16 +8,16 @@ import { useChatItem } from "./chat-item.hook";
 
 type ChatItemProps = {
   testID?: string;
-  user: FirebaseUserDatabase;
+  chat: FirebaseUserDatabase;
   onChatPress: () => void;
 };
 
 export function ChatItem({
   testID = "components.chat-item",
   onChatPress,
-  user,
+  chat,
 }: ChatItemProps) {
-  const { handleLastMessage, lastMessageTime } = useChatItem(user);
+  const { handleLastMessage, lastMessageTime } = useChatItem(chat);
 
   return (
     <TouchableOpacity
@@ -27,8 +27,8 @@ export function ChatItem({
     >
       <Image
         source={
-          user.photoUrl
-            ? { uri: user.photoUrl }
+          chat.photoUrl
+            ? { uri: chat.photoUrl }
             : require("@assets/empty-image.png")
         }
         style={{ height: hp(6), width: hp(6) }}
@@ -41,7 +41,7 @@ export function ChatItem({
             style={{ fontSize: hp(1.8) }}
             className="font-semibold text-neutral-800"
           >
-            {user.username}
+            {chat.username}
           </Text>
           <Text
             style={{ fontSize: hp(1.8) }}

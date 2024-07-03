@@ -13,7 +13,7 @@ export function HomeScreen() {
       <StatusBar style="light" />
 
       {users.length >= 0 ? (
-        <ChatList users={users} testID="screens.home.chat-list" />
+        <ChatList data={users} testID="screens.home.chat-list" />
       ) : (
         <View className="flex-1 items-center justify-center ">
           <Loading size={80} testID="screens.home.loading" />

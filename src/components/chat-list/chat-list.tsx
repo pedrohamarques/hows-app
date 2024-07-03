@@ -10,11 +10,11 @@ import { useChatList } from "./chat-list.hook";
 
 type ChatListProps = {
   testID?: string;
-  users: FirebaseUserDatabase[];
+  data: FirebaseUserDatabase[];
 };
 
 export function ChatList({
-  users,
+  data,
   testID = "screens.home.components.chat-list",
 }: ChatListProps) {
   const { handleChatPress } = useChatList();
@@ -22,12 +22,12 @@ export function ChatList({
   return (
     <View testID={testID} className="flex-1">
       <FlatList
-        data={users}
+        data={data}
         contentContainerStyle={{ flex: 1 }}
         showsVerticalScrollIndicator={false}
         className="py-5"
         renderItem={({ item }) => (
-          <ChatItem user={item} onChatPress={() => handleChatPress(item)} />
+          <ChatItem chat={item} onChatPress={() => handleChatPress(item)} />
         )}
         ItemSeparatorComponent={Divider}
         ListEmptyComponent={
