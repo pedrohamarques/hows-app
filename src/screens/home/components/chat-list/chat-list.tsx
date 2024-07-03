@@ -1,16 +1,17 @@
 import { FlatList, View } from "react-native";
 
 import { Divider } from "@components/divider";
-import { ChatItem } from "@components/chat-item";
 import { EmptyList } from "@components/empty-list";
 
 import { FirebaseUserDatabase } from "@typings/authentication";
 
 import { useChatList } from "./chat-list.hook";
+import { ChatItem } from "../chat-item";
 
 type ChatListProps = {
   testID?: string;
   data: FirebaseUserDatabase[];
+  isGroup?: boolean;
 };
 
 export function ChatList({
@@ -27,7 +28,7 @@ export function ChatList({
         showsVerticalScrollIndicator={false}
         className="py-5"
         renderItem={({ item }) => (
-          <ChatItem chat={item} onChatPress={() => handleChatPress(item)} />
+          <ChatItem user={item} onChatPress={() => handleChatPress(item)} />
         )}
         ItemSeparatorComponent={Divider}
         ListEmptyComponent={
