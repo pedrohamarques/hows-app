@@ -26,7 +26,6 @@ export function GroupChatRoomScreen() {
     setMessageText,
   } = useGroupChatRoom();
 
-  console.log(groupData, "here");
   return (
     <SafeAreaView
       className="flex-1 bg-white"
@@ -45,12 +44,11 @@ export function GroupChatRoomScreen() {
           contentContainerStyle={{ flex: 1, justifyContent: "space-between" }}
         >
           <View className="flex-1">
-            {/* <MessageList
-              messages={[]}
+            <MessageList
+              messages={messages}
               testID="screens.chat-room.message-list"
-              targetUser={userInfo}
               scrollRef={scrollViewChatRef}
-            /> */}
+            />
           </View>
           <View style={{ marginBottom: hp(2.7) }} className="pt-2">
             <View className="flex-row justify-between mx-3 bg-white border p-2 border-neutral-300 rounded-full pl-5">
