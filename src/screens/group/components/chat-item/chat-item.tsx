@@ -17,6 +17,7 @@ export function ChatItem({
   onChatPress,
   chat,
 }: ChatItemProps) {
+  const { handleLastMessage } = useChatItem(chat);
   return (
     <TouchableOpacity
       testID={testID}
@@ -41,14 +42,14 @@ export function ChatItem({
             style={{ fontSize: hp(1.8) }}
             className="font-medium text-neutral-800"
           >
-            Message
+            Date
           </Text>
         </View>
         <Text
           style={{ fontSize: hp(1.6) }}
           className="font-medium text-neutral-500"
         >
-          Text
+          {handleLastMessage()}
         </Text>
       </View>
     </TouchableOpacity>
